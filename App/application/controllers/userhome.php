@@ -22,8 +22,9 @@ class UserHome extends CI_Controller
 
     public function project($projectid)
     {
+        $username = $_SESSION['User_Name'];
         $project = $this->project_model->get_project($projectid);
-        $tasks = $this->task_model->get_tasks($projectid);
+        $tasks = $this->task_model->get_tasks($projectid, $username);
         $data = array(
             'project' => $project,
             'tasks' => $tasks
@@ -31,11 +32,24 @@ class UserHome extends CI_Controller
         $this->load->view('project_view', $data);
     }
 
-    public function task($taskid)
+    public function task($taskid, $projectid)
     {
         $task = $this->task_model->get_task($taskid);
         $data = array(
-            'task' => $task
+            'task' => $task,
+            'project_id' => $projectid
+        );
+        $this->load->view('task_view', $data);
+    }
+
+    public function done_task($taskid, $projectid)
+    {
+        $result = $this->task_model->done_task($taskid);
+        $task = $this->task_model->get_task($taskid);
+        $data = array(
+            'task' => $task,
+            'result' => $result,
+            'project_id' => $projectid
         );
         $this->load->view('task_view', $data);
     }

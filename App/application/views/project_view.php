@@ -20,14 +20,17 @@
     ?>
   </div>
   <div class="col-sm-1"></div>
-  <div class="jumbotron col-sm-4">
+  <div class="jumbotron col-sm-5">
     <?php
-        echo "<h1>Tasks</h1></br>";
+        echo "<h1>Your Tasks</h1></br>";
     ?>
     <div class="list-group">
         <?php
             foreach ($tasks as $task) {
-                echo "<a href=\"../task/$task->Task_ID\" class=\"list-group-item\"> $task->Task_Name &#8195 &#8195 &#8195 $task->Task_StartDate &#8195 &#8195 &#8195 $task->Task_FinishDate</a>";
+                echo "<a href=\"../task/$task->Task_ID/$project->Project_ID\" class=\"list-group-item\"> $task->Task_Name &#8195 &#8195 &#8195 
+                        $task->Task_StartDate &#8195 &#8195 &#8195 
+                            $task->Task_FinishDate &#8195 &#8195 &#8195 
+                                $task->Task_Status</a>";
             }
         ?>
     </div>
