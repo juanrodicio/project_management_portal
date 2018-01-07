@@ -43,7 +43,7 @@ class User extends CI_Controller
             } else {
                 $this->user_model->add_user();
                 $data = array('message' => 'User registered correctly');
-                $this->load->view('register_view', $data);
+                $this->load->view('users_view', $data);
             }
         }
     }
@@ -72,13 +72,13 @@ class User extends CI_Controller
             if ($var == true) {
                 $vars = array('User_Name' => $this->input->post('username'));
                 $this->session->set_userdata($vars);
-                redirect(base_url() . 'index.php/userhome');
+                redirect(base_url() . 'userhome/');
             } else {
                 $message = array('message' => 'Username/Password is not correct');
                 $this->load->view('users_view', $message);
             }
         } else {
-            redirect(base_url() . 'index.php/user');
+            redirect(base_url() . 'user/');
         }
 
     }

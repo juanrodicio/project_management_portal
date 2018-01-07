@@ -9,7 +9,7 @@
     <h2><?=$message?> </h2>
  <?php endif;?>
  <!--form-->
- <form name="form_iniciar" method="POST" action="<?=base_url() . 'index.php/user/verify_session'?>">
+ <form name="form_iniciar" method="POST" action="<?=base_url() . 'user/verify_session'?>">
  <label for="User"> Username</label>
  <input type="text" name="username" /> <br/>
  <label for="password"> Password</label>

@@ -5,7 +5,7 @@
 </head>
 <body>
  <h1>User Register</h1>
- 
+
  <?php if (isset($message)): ?>
     <h2> <?=$message?> </h2>
 <?php endif;?>
@@ -13,8 +13,7 @@
  <!--form-->
  <!--@set_value en los inputs para que recuerde los datos introducidos-->
  <?=
-form_open(base_url() . 'index.php/user/verify_register', array('name' => 'form_reg
-', ));?>
+form_open(base_url() . 'user/verify_register', array('name' => 'form_reg', ));?>
 <?=form_label('Username', 'Username');?> <br /> <br />
 <?=form_input('username', @set_value('username'))?> <br /> <br />
 
@@ -44,7 +43,7 @@ echo form_dropdown('userTypes', $userTypes, 'Pig');
 <?=form_input('groupID');?> <br /> <br />
 
 <?=form_submit('submit_reg', 'Register');?>
-<a href="<?=base_url() . 'index.php/user/'?>" title="Log in">Log in!</a>
+<a href="<?=base_url() . 'user/'?>" title="Log in">Log in!</a>
  <?=form_close();?>
  <hr />
  <?=validation_errors();?>
