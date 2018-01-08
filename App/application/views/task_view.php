@@ -148,7 +148,7 @@
   </div>
 </div>
 <?php
-    if($task->Task_Status == 'Pending')
+    if($task->Task_Status == 'Pending' && $user_type != 'Stakeholder')
         echo "<a href=\"../../done_task/$task->Task_ID/$project_id\" class=\"btn btn-success\" role=\"button\">Mark as done</a>";
     echo "<a href=\"../../project/$project_id\" class=\"btn btn-primary\" role=\"button\">Back</a>";
 ?>

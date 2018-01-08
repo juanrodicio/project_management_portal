@@ -29,12 +29,18 @@ class UserHome extends CI_Controller
     {
         $username = $_SESSION['User_Name'];
         $project = $this->project_model->get_project($projectid);
-        $tasks = $this->task_model->get_tasks($projectid, $username);
+        if($_SESSION['User_Type'] != 'Stakeholder')
+            $tasks = $this->task_model->get_tasks($projectid, $username);
+        else
+            $tasks = $this->task_model->get_project_tasks($projectid);
         $project_progress = $this->project_model->get_project_progress($projectid);
+
+
         $data = array(
             'project' => $project,
             'tasks' => $tasks,
-            'project_progress' => $project_progress
+            'project_progress' => $project_progress,
+            'user_type' => $_SESSION['User_Type']
         );
         $this->load->view('project_view', $data);
     }
@@ -48,6 +54,7 @@ class UserHome extends CI_Controller
         $data = array(
             'task' => $task,
             'project_id' => $projectid,
+            'user_type' => $_SESSION['User_Type'],
             'users_assigned' => $users,
             'activeissues' => $activeissues,
             'closedissues' => $closedissues

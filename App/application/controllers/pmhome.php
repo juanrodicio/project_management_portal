@@ -33,9 +33,11 @@ class PMHome extends CI_Controller
         $project = $this->project_model->get_project($projectid);
         $tasks = $this->task_model->get_project_tasks($projectid);
         $project_progress = $this->project_model->get_project_progress($projectid);
+
         $data = array(
             'project' => $project,
             'tasks' => $tasks,
+            'user_type' => $_SESSION['User_Type'],
             'project_progress' => $project_progress,
             'user_type' => 'Project Manager'
         );
@@ -109,9 +111,11 @@ class PMHome extends CI_Controller
         $users = $this->task_model->get_users_assigned($taskid);
         $activeissues = $this->issue_model->get_activeissues($taskid);
         $closedissues = $this->issue_model->get_closedissues($taskid);
+
         $data = array(
             'task' => $task,
             'project_id' => $projectid,
+            'user_type' => $_SESSION['User_Type'],
             'users_assigned' => $users,
             'activeissues' => $activeissues,
             'closedissues' => $closedissues

@@ -80,9 +80,12 @@
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#Comments">Comments</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#newComment">Add new comment</a>
-  </li>
+  <?php
+  if($issue->Issue_Status == 'active')
+    echo "<li class=\"nav-item\">
+        <a class=\"nav-link\" data-toggle=\"tab\" href=\"#newComment\">Add new comment</a>
+        </li>";
+  ?>
 </ul></br>
 
 <!-- Tab panes -->

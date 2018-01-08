@@ -71,7 +71,8 @@ class User extends CI_Controller
 
             if ($var == true) {
                 $vars = array(
-                    'User_Name' => $this->input->post('username')
+                    'User_Name' => $this->input->post('username'),
+                    'User_Type' => $this->user_model->get_user($this->input->post('username'))->User_Type
                 );
                 $this->session->set_userdata($vars);
                 $user = $this->user_model->get_user($_SESSION['User_Name']);

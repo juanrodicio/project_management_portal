@@ -35,11 +35,10 @@
     
 
     <?php
-    if(isset($user_type))
+    if($user_type == 'Project Manager')
                 echo "<a class=\"navbar-brand\" href=".base_url()."pmhome>Home</a>";
             else
                 echo "<a class=\"navbar-brand\" href=".base_url()."userhome>Home</a>";
-            ?>
     ?>
      <form class="form-inline">
     <a href="<?=base_url() . "user/profile"?>"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>&#8195
@@ -65,7 +64,7 @@
   <div class="col-sm-1"></div>
   <div class="jumbotron col-sm-5">
     <?php
-        if(isset($user_type))
+        if($user_type != 'Pig')
             echo "<h1>Project Tasks</h1></br>";
         else
             echo "<h1>Your Tasks</h1></br>";       
@@ -81,14 +80,14 @@
         ?>
     </div>
     <?php
-        if(isset($user_type))
+        if($user_type == 'Project Manager')
             echo "<br><a href=\"../new_project_task/$project->Project_ID\" class=\"btn btn-success\" role=\"button\">Add Task</a>";
     ?>
   </div>
 </div>
 
 <?php
-    if(isset($user_type))
+    if($user_type == 'Project Manager')
         echo "<a href=".base_url()."pmhome/ class=\"btn btn-primary\" role=\"button\">Back</a>";
     else
         echo "<a href=".base_url()."userhome/ class=\"btn btn-primary\" role=\"button\">Back</a>";
