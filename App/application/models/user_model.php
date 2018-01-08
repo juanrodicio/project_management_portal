@@ -53,4 +53,29 @@ class User_model extends CI_Model
         else
             return false;
     }
+
+    public function get_user($username)
+    {
+        $ssql = "select * from user u,project_group pg where u.User_Name='" . $username ."'
+                    and pg.Group_ID = u.User_Group";
+        $query = $this->db->query($ssql);
+        
+        return $query->row();
+    }
+
+    public function update_user_all($email, $fullName, $password)
+    {
+        $ssql = "update user set User_Email='".$email."', User_FullName='".$fullName."', User_Password='".$password."'
+                    where User_Name='".$_SESSION['User_Name']."'";
+        $this->db->query($ssql);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function update_user($email, $fullName)
+    {
+        $ssql = "update user set User_Email='".$email."', User_FullName='".$fullName."'
+                    where User_Name='".$_SESSION['User_Name']."'";
+        $this->db->query($ssql);
+        return $this->db->affected_rows() > 0;
+    }
 }

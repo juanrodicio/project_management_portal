@@ -70,7 +70,9 @@ class User extends CI_Controller
             $var = $this->user_model->verify_session();
 
             if ($var == true) {
-                $vars = array('User_Name' => $this->input->post('username'));
+                $vars = array(
+                    'User_Name' => $this->input->post('username')
+                );
                 $this->session->set_userdata($vars);
                 redirect(base_url() . 'userhome/');
             } else {
@@ -81,5 +83,42 @@ class User extends CI_Controller
             redirect(base_url() . 'user/');
         }
 
+    }
+    
+    public function profile()
+    {
+        $user = $this->user_model->get_user($_SESSION['User_Name']);
+        $data = array(
+            'user' => $user 
+        );
+        $this->load->view('profile_view', $data);
+    }
+
+    public function update_user()
+    {
+        if ($this->input->post('submit-profile'))
+        {
+            $email = $this->input->post('email');
+            $fullName = $this->input->post('fullName');
+            $password = $this->input->post('password');
+
+            if($password == '')
+                $result = $this->user_model->update_user($email, $fullName);
+            else
+                $result = $this->user_model->update_user_all($email, $fullName, $password);
+        }
+
+        $user = $this->user_model->get_user($_SESSION['User_Name']);
+        $data = array(
+            'user' => $user,
+            'result' => $result 
+        );
+        $this->load->view('profile_view', $data);
+    }
+
+    public function log_out(){
+        $this->session->unset_userdata('User_Name');
+        $this->session->sess_destroy();
+        redirect(base_url() . 'user','refresh');
     }
 }

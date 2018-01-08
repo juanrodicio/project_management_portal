@@ -6,6 +6,10 @@ class UserHome extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if ( ! $this->session->userdata('User_Name'))
+        { 
+            redirect(base_url().'user');
+        }
         $this->load->model('project_model');
         $this->load->model('task_model');
     }
