@@ -50,7 +50,6 @@
                 <strong>Failed</strong> Can't mark Task as done.
                   </div>";
 ?>
-
 <div class="row">
   <div class="jumbotron col-sm-3">
     <?php 
@@ -66,6 +65,86 @@
 
         echo "<p>Remaining Days:</br>".$interval->format('%R%a days')."</p>";
     ?>
+  </div>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-6">
+    </br><h2>This task is assigned to:</h2>
+    <?php
+        foreach($users_assigned as $user)
+        {
+            echo "&#8195<span class=\"badge badge-pill badge-primary\">$user->User_Name</span>";
+        }
+    ?>
+    </br></br>
+    <h2>Issues</h2>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#ActiveIssues">Active Issues</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#ClosedIssues">Closed Issues</a>
+        </li>
+    </ul></br>
+    <div class="tab-content">
+    <div class="tab-pane active container" id="ActiveIssues">
+        <div class="list-group">
+        <?php
+            foreach($activeissues as $issue)
+            {
+                $urlToGo = base_url() . "userhome/issue/$issue->Issue_ID";
+                echo "</br>";
+                echo "<a href=\"$urlToGo\" class=\"list-group-item list-group-item-$issue->Issue_Type\" align=\"justify\">#$issue->Issue_ID
+                    $issue->Issue_Title 
+                    <div style=\"text-align: right;\">
+                    <span>
+                        Author: $issue->Issue_Author
+                    </span>
+                </div></a>";
+            }
+        ?>
+        </div></br>
+    </div>
+    <div class="tab-pane container" id="ClosedIssues">
+    <div class="list-group">
+        <?php
+            foreach($closedissues as $issue)
+            {
+                $urlToGo = base_url() . "userhome/issue/$issue->Issue_ID";
+                echo "</br>";
+                echo "<a href=\"$urlToGo\" class=\"list-group-item list-group-item-$issue->Issue_Type\" align=\"justify\">#$issue->Issue_ID
+                    $issue->Issue_Title 
+                    <div style=\"text-align: right;\">
+                    <span>
+                        Author: $issue->Issue_Author
+                    </span>
+                </div></a>";
+            }
+        ?>
+        </div></br>
+    </div>
+    </div>
+    <button class="btn btn-success" data-toggle="collapse" data-target="#newIssue">New Issue!</button>
+
+    <div id="newIssue" class="collapse">
+    <form name="form_newIssue" method="POST" action="<?=base_url() . "userhome/newIssue/$task->Task_ID"?>">
+    
+    </br><label for="title">Title:</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title of Issue">
+
+    <label for="commentary">Commentary:</label>
+    <textarea class="form-control" rows="5" id="commentary" name="commentary" placeholder="Comment here your issue"></textarea>
+
+    <label for="IssueType">Choose here the type of your Issue:</br>
+    </br>Info - Just to inform other users.
+    </br>Warning - Inform that something needs to be changed but still working.
+    </br>Danger - This issue is critical for current working of our task.
+    </label></br>
+    <label class="radio-inline"><input type="radio" name="issueType" value="info">Info</label>
+    <label class="radio-inline"><input type="radio" name="issueType" value="warning">Warning</label>
+    <label class="radio-inline"><input type="radio" name="issueType" value="danger">Danger</label>
+    
+    </br><button type="submit" class="btn btn-success" value="issue" name="submit-issue">Create!</button>
+    </div>
   </div>
 </div>
 <?php

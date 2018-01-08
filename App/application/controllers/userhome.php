@@ -12,6 +12,7 @@ class UserHome extends CI_Controller
         }
         $this->load->model('project_model');
         $this->load->model('task_model');
+        $this->load->model('issue_model');
     }
 
     public function index()
@@ -41,9 +42,15 @@ class UserHome extends CI_Controller
     public function task($taskid, $projectid)
     {
         $task = $this->task_model->get_task($taskid);
+        $users = $this->task_model->get_users_assigned($taskid);
+        $activeissues = $this->issue_model->get_activeissues($taskid);
+        $closedissues = $this->issue_model->get_closedissues($taskid);
         $data = array(
             'task' => $task,
-            'project_id' => $projectid
+            'project_id' => $projectid,
+            'users_assigned' => $users,
+            'activeissues' => $activeissues,
+            'closedissues' => $closedissues
         );
         $this->load->view('task_view', $data);
     }
@@ -58,5 +65,40 @@ class UserHome extends CI_Controller
             'project_id' => $projectid
         );
         $this->load->view('task_view', $data);
+    }
+
+    public function issue($issueid)
+    {
+        $issue = $this->issue_model->get_issue($issueid);
+        $projectid = $this->task_model->get_task($issue->Task_ID)->Task_Project;
+        $comments = $this->issue_model->get_commentaries($issueid);
+
+        $data = array(
+            'issue' => $issue,
+            'projectid' => $projectid,
+            'comments' => $comments
+        );
+        $this->load->view('issue_view',$data);
+
+    }
+
+    public function newIssue($taskid)
+    {
+        $this->issue_model->add_issue($taskid);
+        $projectid = $this->task_model->get_task($taskid)->Task_Project;
+        redirect(base_url() . "userhome/task/$taskid/$projectid");
+    }
+
+    public function newComment($issueid)
+    {
+        $this->issue_model->add_commentary($issueid);
+        redirect(base_url(). "userhome/issue/$issueid");
+    }
+
+    public function close_issue($issueid, $taskid)
+    {
+        $this->issue_model->close_issue($issueid);
+        $projectid = $this->task_model->get_task($taskid)->Task_Project;
+        redirect(base_url() . "userhome/task/$taskid/$projectid");
     }
 }
