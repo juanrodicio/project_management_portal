@@ -82,7 +82,7 @@
     </div>
     <?php
         if(isset($user_type))
-            echo "<br><a href=".base_url()."pmhome/project/new_task class=\"btn btn-success\" role=\"button\">Add Task</a>";
+            echo "<br><a href=\"../new_project_task/$project->Project_ID\" class=\"btn btn-success\" role=\"button\">Add Task</a>";
     ?>
   </div>
 </div>

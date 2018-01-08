@@ -43,4 +43,24 @@ class Task_model extends CI_Model
         $query = $this->db->query($ssql);
         return $query->result();
     }
+    
+    public function add_task($name, $desc, $start, $finish, $members, $project)
+    {
+        $sql = "insert into project_task (Task_ID, Task_Name, Task_Description, Task_StartDate, Task_FinishDate, Task_Status, Task_Project) values (null, '".$name."', '".$desc."', '".$start."', '".$finish."', 'Pending', '".$project."')";
+        
+        $this->db->query($sql);
+        
+        $taskid = $this->db->insert_id();
+        
+      
+        
+        foreach($members as $member)
+        {
+            $sql = "insert into user_tasks (task_id, user_name) values (".$taskid.", '".$member->User_Name."')";
+            $this->db->query($sql);
+        }
+    }
 }
+
+
+

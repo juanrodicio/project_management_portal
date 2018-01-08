@@ -30,8 +30,6 @@ class PMHome extends CI_Controller
     
     public function project($projectid)
     {
-        //$username = $_SESSION['User_Name'];
-        
         $project = $this->project_model->get_project($projectid);
         $tasks = $this->task_model->get_project_tasks($projectid);
         $project_progress = $this->project_model->get_project_progress($projectid);
@@ -74,7 +72,35 @@ class PMHome extends CI_Controller
     
     public function new_project_task($projectid)
     {
-        $this->load->view('new_task_view');
+        $project_members = $this->project_model->get_project_members($projectid);
+        
+        $data = array(
+            'project_id' => $projectid,
+            'project_members' => $project_members
+        );
+        
+        $this->load->view('new_task_view', $data);
+    }
+    
+    public function add_task($projectid)
+    {
+        if ($this->input->post('submit-task'))
+        {
+            $task_name = $this->input->post('taskname');
+            $task_description = $this->input->post('taskdesc');
+            $task_start = $this->input->post('taskstart');
+            $task_finish = $this->input->post('taskfinish');
+            $task_members = $this->input->post('projectmembers');
+        }
+        
+        echo $task_members;
+        $this->task_model->add_task($task_name, $task_description, $task_start, $task_finish, $task_members, $projectid);
+        
+        /*$projects = $this->project_model->get_managed_projects($project_manager);
+        $data = array(
+            'projects' => $projects
+        );
+        $this->load->view('pmhome_view', $data);*/
     }
 
     public function task($taskid, $projectid)
@@ -91,13 +117,6 @@ class PMHome extends CI_Controller
             'closedissues' => $closedissues
         );
         $this->load->view('task_view', $data);
-    }
-    
-    public function add_task($projectid)
-    {
-        $data = array(
-            'project_id' => $projectid
-        );
     }
 
     public function done_task($taskid, $projectid)

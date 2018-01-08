@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Add Task</title>
+    <title>Add Task to Project</title>
     <style>
         body {
             margin: 10px;
@@ -43,7 +43,8 @@
 </nav>
 </br>
 
-<form name="form_project" method="POST" action="<?=base_url() . 'pmhome/add_task'?>">
+<form name="form_project" method="POST" action="<?=base_url() . 'pmhome/add_task/'.$project_id.''?>">
+ 
   
   <div class="row">
     <div class="col"></div>
@@ -84,15 +85,22 @@
   <div class="row">
     <div class="col"></div>
     <div class="form-group col">
-      <label for="tname">Assign members:</label>
-      <input type="text" class="form-control" id="pbudget" name="projectbudget">
+      <label for="tmembers">Assign members:</label><br>
+      <select name="project_members[]" multiple="multiple">
+         <?php
+            foreach($project_members as $pm)
+            {
+                echo "<option value=\"".$pm->User_Name."\">".$pm->User_Name."</option>";
+            }
+         ?>
+      </select>
     </div>
   <div class="col"></div>
   </div>
 
   <div class="row">
     <div class="col"></div>
-    <button type="submit" class="btn btn-primary col" value="Insert" name="submit-project">Add Project!</button>
+    <button type="submit" class="btn btn-primary col" value="Insert" name="submit-task">Add Task!</button>
     <div class="col"></div>
   </div>
 

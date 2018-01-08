@@ -46,13 +46,13 @@ class Project_model extends CI_Model
         $sql = "insert into project (Project_ID, Project_Name, Project_Description, Project_StartDate, Project_FinishDate, Project_Budget, Project_Manager) values (null, '".$name."', '".$desc."', '".$start."', '".$finish."', ".$budget.", '".$projectmang."')";
         
         $this->db->query($sql);
-        
-        /*$pid_sql = "select max(project_id) from project_members";
-        $query = $this->db->query($ssql2);
-        
-        while ($pid = $query->fetch_assoc()) {
-            $sql = "insert into project_members (project_id, user_name)"
-        }*/
+    }
+    
+    public function get_project_members($projectid)
+    {
+        $ssql = "select * from project_members pmm where pmm.project_id ='". $projectid ."'";
+        $query = $this->db->query($ssql);
+        return $query->result();
     }
 }
 
