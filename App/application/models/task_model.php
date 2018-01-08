@@ -29,4 +29,11 @@ class Task_model extends CI_Model
         $this->db->query($ssql);
         return $this->db->affected_rows() > 0;
     }
+
+    public function get_users_assigned($taskid)
+    {
+        $ssql = "select * from user_tasks where Task_ID='" . $taskid . "'";
+        $query = $this->db->query($ssql);
+        return $query->result();
+    }
 }
