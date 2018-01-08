@@ -98,6 +98,15 @@ class User extends CI_Controller
         );
         $this->load->view('profile_view', $data);
     }
+    
+    public function pm_profile()
+    {
+        $user = $this->user_model->get_user($_SESSION['User_Name']);
+        $data = array(
+            'user' => $user 
+        );
+        $this->load->view('pmprofile_view', $data);
+    }
 
     public function update_user()
     {

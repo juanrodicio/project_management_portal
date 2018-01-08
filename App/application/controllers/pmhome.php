@@ -30,7 +30,6 @@ class PMHome extends CI_Controller
     public function project($projectid)
     {
         $username = $_SESSION['User_Name'];
-        //$usertype = $_SESSION['User_Type'];
         
         $project = $this->project_model->get_project($projectid);
         $tasks = $this->task_model->get_tasks($projectid, $username);
