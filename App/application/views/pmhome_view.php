@@ -35,8 +35,8 @@
     <nav class="navbar navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand" href="<?=base_url() . " userhome "?>">Home</a>
         <form class="form-inline">
-            <a href="<?=base_url() . " user/profile "?>"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>&#8195
-            <a href="<?=base_url() . " user/log_out "?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+            <a href="<?=base_url() . "user/profile "?>"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>&#8195
+            <a href="<?=base_url() . "user/log_out "?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
         </form>
     </nav>
 
