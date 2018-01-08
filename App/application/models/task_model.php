@@ -13,6 +13,13 @@ class Task_model extends CI_Model
         $query = $this->db->query($ssql);
         return $query->row();
     }
+    
+    public function get_project_tasks($projectid)
+    {
+        $sql = "select * from project_task pt where pt.task_project = '".$projectid."'";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 
     public function get_tasks($projectid, $username)
     {

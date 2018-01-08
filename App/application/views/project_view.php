@@ -65,7 +65,10 @@
   <div class="col-sm-1"></div>
   <div class="jumbotron col-sm-5">
     <?php
-        echo "<h1>Your Tasks</h1></br>";
+        if(isset($user_type))
+            echo "<h1>Project Tasks</h1></br>";
+        else
+            echo "<h1>Your Tasks</h1></br>";       
     ?>
     <div class="list-group">
         <?php
@@ -77,6 +80,10 @@
             }
         ?>
     </div>
+    <?php
+        if(isset($user_type))
+            echo "<br><a href=".base_url()."pmhome/project/new_task class=\"btn btn-success\" role=\"button\">Add Task</a>";
+    ?>
   </div>
 </div>
 

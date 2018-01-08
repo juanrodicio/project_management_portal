@@ -149,7 +149,7 @@
 </div>
 <?php
     if($task->Task_Status == 'Pending')
-        echo "<a href=\"".base_url() . "/userhome/done_task/$task->Task_ID/$project_id\" class=\"btn btn-success\" role=\"button\">Mark as done</a>";
+        echo "<a href=\"../../done_task/$task->Task_ID/$project_id\" class=\"btn btn-success\" role=\"button\">Mark as done</a>";
     echo "<a href=\"../../project/$project_id\" class=\"btn btn-primary\" role=\"button\">Back</a>";
 ?>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
