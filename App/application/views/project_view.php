@@ -49,6 +49,10 @@
         echo "<p>Budget:</br>$project->Project_Budget</p>";
         echo "<p>Project Manager:</br>$project->Project_Manager</p>";
     ?>
+    </br><label for="project_progress">Project progress:</label>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: <?=$project_progress?>%"><?=$project_progress?>%</div>
+    </div></br>
   </div>
   <div class="col-sm-1"></div>
   <div class="jumbotron col-sm-5">
@@ -67,6 +71,7 @@
     </div>
   </div>
 </div>
+
 <a href="<?=base_url().'userhome'?>" class="btn btn-primary" role="button">Back</a>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

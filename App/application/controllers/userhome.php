@@ -29,9 +29,11 @@ class UserHome extends CI_Controller
         $username = $_SESSION['User_Name'];
         $project = $this->project_model->get_project($projectid);
         $tasks = $this->task_model->get_tasks($projectid, $username);
+        $project_progress = $this->project_model->get_project_progress($projectid);
         $data = array(
             'project' => $project,
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'project_progress' => $project_progress
         );
         $this->load->view('project_view', $data);
     }
