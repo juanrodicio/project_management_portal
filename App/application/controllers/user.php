@@ -74,7 +74,12 @@ class User extends CI_Controller
                     'User_Name' => $this->input->post('username')
                 );
                 $this->session->set_userdata($vars);
-                redirect(base_url() . 'userhome/');
+                $user = $this->user_model->get_user($_SESSION['User_Name']);
+                if ($user->User_Type == 'Project Manager') {
+                    redirect(base_url() . 'pmhome/');
+                } else {
+                    redirect(base_url() . 'userhome/');
+                }
             } else {
                 $message = array('message' => 'Username/Password is not correct');
                 $this->load->view('users_view', $message);
