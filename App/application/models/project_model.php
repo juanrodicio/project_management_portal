@@ -54,6 +54,15 @@ class Project_model extends CI_Model
         $query = $this->db->query($ssql);
         return $query->result();
     }
+    
+    public function add_pigs($projectid, $pigs)
+    {
+        foreach($pigs["project_pigs"] as $pig)
+        {
+            $sql = "insert into project_members (project_id, user_name) values (".$projectid.", '".$pig."')";
+            $query = $this->db->query($sql);
+        }
+    }
 }
 
 

@@ -60,7 +60,7 @@
         <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: <?=$project_progress?>%"><?=$project_progress?>%</div>
     </div></br>
   </div>
-  <div class="col-sm-1"></div>
+  <!--<div class="col-sm-1"></div>-->
   <div class="jumbotron col-sm-5">
     <?php
         if($user_type != 'Pig')
@@ -83,6 +83,21 @@
             echo "<br><a href=\"../new_project_task/$project->Project_ID\" class=\"btn btn-success\" role=\"button\">Add Task</a>";
     ?>
   </div>
+  <?php
+        if($user_type == 'Project Manager')
+        {
+            echo "<div class=\"jumbotron col-sm-3\">";
+            echo "<h1>Members:</h1>";
+            foreach($members as $member)
+            {
+                echo "<p></br>$member->User_Name</p>";
+            }
+            
+            echo "<br><a href=\"../new_project_member/$project->Project_ID\" class=\"btn btn-success\" role=\"button\">Add Member</a>";
+            echo "</div>";
+        }
+            
+    ?>
 </div>
 
 <?php

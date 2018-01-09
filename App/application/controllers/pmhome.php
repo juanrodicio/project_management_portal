@@ -33,13 +33,15 @@ class PMHome extends CI_Controller
         $project = $this->project_model->get_project($projectid);
         $tasks = $this->task_model->get_project_tasks($projectid);
         $project_progress = $this->project_model->get_project_progress($projectid);
+        $project_members = $this->project_model->get_project_members($projectid);
 
         $data = array(
             'project' => $project,
             'tasks' => $tasks,
             'user_type' => $_SESSION['User_Type'],
             'project_progress' => $project_progress,
-            'user_type' => 'Project Manager'
+            'user_type' => 'Project Manager',
+            'members' => $project_members
         );
         $this->load->view('project_view', $data);
     }
@@ -70,6 +72,43 @@ class PMHome extends CI_Controller
             'projects' => $projects
         );
         $this->load->view('pmhome_view', $data);
+    }
+    
+    public function new_project_member($projectid)
+    {
+        $pigs = $this->user_model->get_pigs();
+        
+        $data = array(
+            'project_id' => $projectid,
+            'pigs' => $pigs
+        );
+        
+        $this->load->view('new_member_in_project_view', $data);
+    }
+    
+    public function add_members_to_project($projectid)
+    {
+        if ($this->input->post('submit-pig'))
+        {
+            $task_members['project_pigs'] = $this->input->post('project_pigs');
+
+            $this->project_model->add_pigs($projectid, $task_members);
+        }
+        
+        $project = $this->project_model->get_project($projectid);
+        $tasks = $this->task_model->get_project_tasks($projectid);
+        $project_progress = $this->project_model->get_project_progress($projectid);
+        $project_members = $this->project_model->get_project_members($projectid);
+
+        $data = array(
+            'project' => $project,
+            'tasks' => $tasks,
+            'user_type' => $_SESSION['User_Type'],
+            'project_progress' => $project_progress,
+            'user_type' => 'Project Manager',
+            'members' => $project_members
+        );
+        $this->load->view('project_view', $data);
     }
     
     public function new_project_task($projectid)

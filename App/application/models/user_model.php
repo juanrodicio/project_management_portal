@@ -78,4 +78,11 @@ class User_model extends CI_Model
         $this->db->query($ssql);
         return $this->db->affected_rows() > 0;
     }
+    
+    public function get_pigs()
+    {
+        $ssql = "select * from user where user_type = 'Pig'";
+        $query = $this->db->query($ssql);
+        return $query->result();
+    }
 }
