@@ -30,7 +30,6 @@
     </style>
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark justify-content-between">
     
 

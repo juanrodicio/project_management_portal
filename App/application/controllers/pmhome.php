@@ -88,15 +88,14 @@ class PMHome extends CI_Controller
     {
         if ($this->input->post('submit-task'))
         {
-            $task_name = $this->input->post('taskname');
-            $task_description = $this->input->post('taskdesc');
+            $task_name = $this->input->post('taskname',true);
+            $task_description = $this->input->post('taskdesc',true);
             $task_start = $this->input->post('taskstart');
             $task_finish = $this->input->post('taskfinish');
-            $task_members = $this->input->post('projectmembers');
+            $task_members['project_members'] = $this->input->post('project_members');
+
+            $this->task_model->add_task($task_name, $task_description, $task_start, $task_finish, $task_members, $projectid);
         }
-        
-        echo $task_members;
-        $this->task_model->add_task($task_name, $task_description, $task_start, $task_finish, $task_members, $projectid);
         
         /*$projects = $this->project_model->get_managed_projects($project_manager);
         $data = array(
@@ -127,10 +126,18 @@ class PMHome extends CI_Controller
     {
         $result = $this->task_model->done_task($taskid);
         $task = $this->task_model->get_task($taskid);
+        $users = $this->task_model->get_users_assigned($taskid);
+        $activeissues = $this->issue_model->get_activeissues($taskid);
+        $closedissues = $this->issue_model->get_closedissues($taskid);
+        
         $data = array(
             'task' => $task,
-            'result' => $result,
-            'project_id' => $projectid
+            'project_id' => $projectid,
+            'user_type' => $_SESSION['User_Type'],
+            'users_assigned' => $users,
+            'activeissues' => $activeissues,
+            'closedissues' => $closedissues,
+            'result' => $result
         );
         $this->load->view('task_view', $data);
     }

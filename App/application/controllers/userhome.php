@@ -66,10 +66,18 @@ class UserHome extends CI_Controller
     {
         $result = $this->task_model->done_task($taskid);
         $task = $this->task_model->get_task($taskid);
+        $users = $this->task_model->get_users_assigned($taskid);
+        $activeissues = $this->issue_model->get_activeissues($taskid);
+        $closedissues = $this->issue_model->get_closedissues($taskid);
+        
         $data = array(
             'task' => $task,
-            'result' => $result,
-            'project_id' => $projectid
+            'project_id' => $projectid,
+            'user_type' => $_SESSION['User_Type'],
+            'users_assigned' => $users,
+            'activeissues' => $activeissues,
+            'closedissues' => $closedissues,
+            'result' => $result
         );
         $this->load->view('task_view', $data);
     }
