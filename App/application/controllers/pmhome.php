@@ -97,11 +97,18 @@ class PMHome extends CI_Controller
             $this->task_model->add_task($task_name, $task_description, $task_start, $task_finish, $task_members, $projectid);
         }
         
-        /*$projects = $this->project_model->get_managed_projects($project_manager);
+        $project = $this->project_model->get_project($projectid);
+        $tasks = $this->task_model->get_project_tasks($projectid);
+        $project_progress = $this->project_model->get_project_progress($projectid);
+
         $data = array(
-            'projects' => $projects
+            'project' => $project,
+            'tasks' => $tasks,
+            'user_type' => $_SESSION['User_Type'],
+            'project_progress' => $project_progress,
+            'user_type' => 'Project Manager'
         );
-        $this->load->view('pmhome_view', $data);*/
+        $this->load->view('project_view', $data);
     }
 
     public function task($taskid, $projectid)
