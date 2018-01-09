@@ -122,7 +122,7 @@
 <div class="button-right">
     <a href="<?=base_url() . "userhome/task/$issue->Task_ID/$projectid"?>" class="btn btn-primary" role="button">Back</a>
     <?php
-    if($issue->Issue_Status == 'active')
+    if($issue->Issue_Status == 'active' && $_SESSION['User_Type'] != 'Stakeholder')
         echo "<button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#myModal\">
                 Close Issue
               </button>";?>
