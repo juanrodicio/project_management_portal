@@ -17,9 +17,9 @@
 <body class="bg-dark">
 <div class="container">
  <?php if (isset($message)): ?>
-    <div class="alert alert-danger alert-dismissable">
+    <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Failed!</strong> <?=$message?>
+        <strong>Success!</strong> <?=$message?>
     </div>
  <?php endif;?>
 
